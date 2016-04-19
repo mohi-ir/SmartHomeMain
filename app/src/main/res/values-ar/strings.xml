@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">خانه من</string>
+
+    <!-- main activity -->
+    <string name="enter_home">ورود</string>
+    <string name="settings">تنظیمات</string>
+    <string name="exit_home">خروج</string>
+    <string name="u1">U1</string>
+    <string name="lighting">روشنایی</string>
+    <string name="u2">U2</string>
+
+    <!-- home_lighting_activity -->
+    <string name="living_room">اتاق نشیمن</string>
+    <string name="entrance">ورودی</string>
+    <string name="balcony">بالکن</string>
+    <string name="master_bedroom">اتاق خواب </string>
+
+    <!-- central setting -->
+    <string name="password_setting">کلمه عبور</string>
+    <string name="save">ذخیره</string>
+
+    <!-- layout  -->
+    <string name="language">English</string>
+
+</resources>

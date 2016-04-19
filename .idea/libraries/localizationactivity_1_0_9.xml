@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="localizationactivity-1.0.9">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.akexorcist/localizationactivity/1.0.9/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.akexorcist/localizationactivity/1.0.9/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.akexorcist/localizationactivity/1.0.9/ac1e2b8fe15928c40d7fe294052cfa017531cc97/localizationactivity-1.0.9-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

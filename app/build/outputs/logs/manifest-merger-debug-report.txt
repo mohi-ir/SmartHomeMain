@@ -1,0 +1,123 @@
+-- Merging decision tree log ---
+manifest
+ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:2:1-52:12
+	package
+		ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:3:5-41
+		INJECTED from E:\projects\MyHome\app\src\main\AndroidManifest.xml
+		INJECTED from E:\projects\MyHome\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from E:\projects\MyHome\app\src\main\AndroidManifest.xml
+		INJECTED from E:\projects\MyHome\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:2:11-69
+	android:versionCode
+		INJECTED from E:\projects\MyHome\app\src\main\AndroidManifest.xml
+		INJECTED from E:\projects\MyHome\app\src\main\AndroidManifest.xml
+uses-feature#android.hardware.usb.host
+ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:5:5-62
+	android:name
+		ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:5:19-59
+application
+ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:7:5-50:19
+MERGED from [com.android.support:appcompat-v7:23.1.1] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.1.1] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:recyclerview-v7:21.0.0] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\21.0.0\AndroidManifest.xml:17:5-19:19
+MERGED from [com.android.support:support-v4:23.1.1] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\AndroidManifest.xml:22:5-20
+MERGED from [com.akexorcist:localizationactivity:1.0.9] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.akexorcist\localizationactivity\1.0.9\AndroidManifest.xml:11:5-15:19
+MERGED from [com.android.support:appcompat-v7:23.1.1] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.1.1] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-appindexing:8.1.0] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.1.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-basement:8.1.0] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:23.1.1] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\AndroidManifest.xml:22:5-20
+	android:label
+		ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:11:9-41
+	android:supportsRtl
+		ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:12:9-35
+	android:configChanges
+		ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:9:9-39
+	android:allowBackup
+		ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:8:9-35
+	android:icon
+		ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:10:9-43
+	android:theme
+		ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:13:9-40
+service#com.example.mohi_pc.myhome.UsbCommunicationService
+ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:23:9-60
+	android:name
+		ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:23:18-57
+activity#com.example.mohi_pc.myhome.MainActivity
+ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:25:9-38:20
+	android:name
+		ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:25:19-47
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:26:13-30:29
+action#android.intent.action.MAIN
+ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:27:17-69
+	android:name
+		ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:27:25-66
+category#android.intent.category.LAUNCHER
+ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:29:17-77
+	android:name
+		ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:29:27-74
+intent-filter#android.hardware.usb.action.USB_DEVICE_ATTACHED
+ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:31:13-33:29
+action#android.hardware.usb.action.USB_DEVICE_ATTACHED
+ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:32:17-90
+	android:name
+		ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:32:25-87
+meta-data#android.hardware.usb.action.USB_DEVICE_ATTACHED
+ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:35:13-37:50
+	android:resource
+		ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:37:17-47
+	android:name
+		ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:36:17-79
+activity#com.example.mohi_pc.myhome.CentralSettingActivity
+ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:39:9-60
+	android:name
+		ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:39:19-57
+activity#com.example.mohi_pc.myhome.SetPasswordActivity
+ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:40:9-57
+	android:name
+		ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:40:19-54
+meta-data#com.google.android.gms.version
+ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:45:9-47:69
+MERGED from [com.google.android.gms:play-services-basement:8.1.0] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\AndroidManifest.xml:21:9-23:69
+	android:value
+		ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:47:13-66
+	android:name
+		ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:46:13-58
+activity#com.example.mohi_pc.myhome.SetLightingActivity
+ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:49:9-66
+	android:name
+		ADDED from E:\projects\MyHome\app\src\main\AndroidManifest.xml:49:19-54
+uses-sdk
+INJECTED from E:\projects\MyHome\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:appcompat-v7:23.1.1] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.1.1] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:recyclerview-v7:21.0.0] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\21.0.0\AndroidManifest.xml:15:5-42
+MERGED from [com.android.support:support-v4:23.1.1] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\AndroidManifest.xml:20:5-43
+MERGED from [com.akexorcist:localizationactivity:1.0.9] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.akexorcist\localizationactivity\1.0.9\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:appcompat-v7:23.1.1] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.1.1] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-appindexing:8.1.0] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.1.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-basement:8.1.0] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:23.1.1] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\AndroidManifest.xml:20:5-43
+MERGED from [com.github.felHR85:UsbSerial:3.3] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.github.felHR85\UsbSerial\3.3\AndroidManifest.xml:6:5-8:41
+	android:targetSdkVersion
+		INJECTED from E:\projects\MyHome\app\src\main\AndroidManifest.xml
+		INJECTED from E:\projects\MyHome\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from E:\projects\MyHome\app\src\main\AndroidManifest.xml
+		INJECTED from E:\projects\MyHome\app\src\main\AndroidManifest.xml
+activity#android.support.v7.widget.TestActivity
+ADDED from [com.android.support:recyclerview-v7:21.0.0] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\21.0.0\AndroidManifest.xml:18:9-115
+	android:label
+		ADDED from [com.android.support:recyclerview-v7:21.0.0] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\21.0.0\AndroidManifest.xml:18:19-59
+	android:name
+		ADDED from [com.android.support:recyclerview-v7:21.0.0] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\21.0.0\AndroidManifest.xml:18:60-113
+activity#com.akexorcist.localizationactivity.BlankDummyActivity
+ADDED from [com.akexorcist:localizationactivity:1.0.9] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.akexorcist\localizationactivity\1.0.9\AndroidManifest.xml:12:9-14:69
+	android:theme
+		ADDED from [com.akexorcist:localizationactivity:1.0.9] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.akexorcist\localizationactivity\1.0.9\AndroidManifest.xml:14:13-66
+	android:name
+		ADDED from [com.akexorcist:localizationactivity:1.0.9] E:\projects\MyHome\app\build\intermediates\exploded-aar\com.akexorcist\localizationactivity\1.0.9\AndroidManifest.xml:13:13-82
