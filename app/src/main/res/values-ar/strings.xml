@@ -2,24 +2,29 @@
     <string name="app_name">خانه من</string>
 
     <!-- main activity -->
-    <string name="enter_home">ورود</string>
     <string name="settings">تنظیمات</string>
-    <string name="exit_home">خروج</string>
-    <string name="u1">U1</string>
-    <string name="lighting">روشنایی</string>
-    <string name="u2">U2</string>
+    <string name="set_lighting">روشنایی</string>
+    <string name="changeNames">تغییر اسامی</string>
 
-    <!-- home_lighting_activity -->
-    <string name="living_room">اتاق نشیمن</string>
-    <string name="entrance">ورودی</string>
-    <string name="balcony">بالکن</string>
-    <string name="master_bedroom">اتاق خواب </string>
 
-    <!-- central setting -->
+    <!-- activity set lighting -->
+    <string name="help_select_room">اتاق را انتخاب کنید</string>
+    <string name="configure_channels">نور دلخواه خود را انتخاب کنید</string>
+    <string name="cancel">انصراف</string>
+
+    <!-- setting -->
     <string name="password_setting">کلمه عبور</string>
     <string name="save">ذخیره</string>
 
-    <!-- layout  -->
-    <string name="language">English</string>
+    <!-- activity change names -->
+    <string name="wall_units">کلید های دیواری</string>
+    <string name="channels">کانال ها</string>
+    <string name="save_dialog_question">آیا مایل هستید تغییرات را ذخیره کنید؟</string>
+    <string name="changes_saved">تغییرات ذخیره شد</string>
+    <string name="memories">حافظه ها</string>
+    <string name="rooms">اتاق ها</string>
+
+    <!-- footer  -->
+    <string name="language">Farsi/Eng</string>
 
 </resources>

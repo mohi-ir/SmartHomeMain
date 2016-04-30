@@ -37,7 +37,6 @@ public class MainActivity extends LocalizationActivity {
 
     boolean isStartUsbCommunication =false;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,19 +49,17 @@ public class MainActivity extends LocalizationActivity {
         editor.putString("networkAddress", "belabelabela");
         editor.commit();
 
-
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
-        /*DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "home_database", null);
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "home_database", null);
         SQLiteDatabase db = helper.getWritableDatabase();
         DaoMaster daoMaster = new DaoMaster(db);
-        DaoMaster.dropAllTables(db, true);
+        //DaoMaster.dropAllTables(db,true);
         DaoMaster.createAllTables(db, true);
-        db.close();
         helper.close();
-        loadFixtures();*/
+        //loadFixtures();
 
        /* Intent intent = new Intent(this, UsbCommunicationService.class);
         Bundle bundle = new Bundle();
@@ -70,7 +67,6 @@ public class MainActivity extends LocalizationActivity {
         bundle.putString("COM_PORT", "R");
         intent.putExtras(bundle);
         startService(intent);*/
-
     }
 
     public void loadFixtures()
@@ -83,8 +79,6 @@ public class MainActivity extends LocalizationActivity {
         DaoSession daoSession = daoMaster.newSession();
 
         db.beginTransaction();
-
-
 
         //function
         daoSession.getFunctionDao();
@@ -144,47 +138,47 @@ public class MainActivity extends LocalizationActivity {
         bedroomWU1.setAddress("986734");
         bedroomWU1.setWuType(wu1);
         bedroomWU1.setRoom(bedroom);
-        bedroomWU1.setName("wallUnit_1");
+        bedroomWU1.setName("bedroom_wallUnit_1");
         daoSession.insert(bedroomWU1);
         WallUnit bedroomWU2 = new WallUnit();
         bedroomWU2.setAddress("239872");
         bedroomWU2.setWuType(wu1);
         bedroomWU2.setRoom(bedroom);
-        bedroomWU2.setName("wallUnit_2");
+        bedroomWU2.setName("bedroom_wallUnit_2");
         daoSession.insert(bedroomWU2);
         //kitchen
         WallUnit kitchenWU1=new WallUnit();
         kitchenWU1.setRoom(kitchen);
         kitchenWU1.setAddress("34765");
         kitchenWU1.setWuType(wu1);
-        kitchenWU1.setName("wallUnit_1");
+        kitchenWU1.setName("kitchen_wallUnit_1");
         daoSession.insert(kitchenWU1);
         //living room
         WallUnit livingRoomWU1 = new WallUnit();
         livingRoomWU1.setAddress("876543");
         livingRoomWU1.setRoom(livingRoom);
         livingRoomWU1.setWuType(wu1);
-        livingRoomWU1.setName("wallUnit_1");
+        livingRoomWU1.setName("living_wallUnit_1");
         daoSession.insert(livingRoomWU1);
         WallUnit livingRoomWU2 = new WallUnit();
         livingRoomWU2.setWuType(wu2);
         livingRoomWU2.setParentId(wu2.getId());
         livingRoomWU2.setAddress("98765");
         livingRoomWU2.setRoom(livingRoom);
-        livingRoomWU2.setName("wallUnit_2");
+        livingRoomWU2.setName("living_wallUnit_2");
         daoSession.insert(livingRoomWU2);
         WallUnit livingRoomWU3 = new WallUnit();
         livingRoomWU3.setRoom(livingRoom);
         livingRoomWU3.setAddress("87654");
         livingRoomWU3.setWuType(wu1);
-        livingRoomWU3.setName("wallUnit_3");
+        livingRoomWU3.setName("living_wallUnit_3");
         daoSession.insert(livingRoomWU3);
         //balcony
         WallUnit balconyWU1 = new WallUnit();
         balconyWU1.setAddress("876654");
         balconyWU1.setRoom(balcony);
         balconyWU1.setWuType(wu1);
-        balconyWU1.setName("wallUnit_1");
+        balconyWU1.setName("balcony_wallUnit_1");
         daoSession.insert(balconyWU1);
 
         //channels
@@ -195,21 +189,21 @@ public class MainActivity extends LocalizationActivity {
         bedroomWU1Ch1.setFunction(lighting);
         bedroomWU1Ch1.setState(5);
         bedroomWU1Ch1.setWallUnit(bedroomWU1);
-        bedroomWU1Ch1.setName("Ch_1");
+        bedroomWU1Ch1.setName("bed_wu1_Ch_1");
         daoSession.insert(bedroomWU1Ch1);
         Channel bedroomWU1Ch2 = new Channel();
         bedroomWU1Ch2.setAddress("3764");
         bedroomWU1Ch2.setFunction(lighting);
         bedroomWU1Ch2.setState(0);
         bedroomWU1Ch2.setWallUnit(bedroomWU1);
-        bedroomWU1Ch2.setName("Ch_2");
+        bedroomWU1Ch2.setName("bed_wu1_Ch_2");
         daoSession.insert(bedroomWU1Ch2);
         Channel bedroomWU1Ch3 = new Channel();
         bedroomWU1Ch3.setAddress("45761");
         bedroomWU1Ch3.setFunction(lighting);
         bedroomWU1Ch3.setState(67);
         bedroomWU1Ch3.setWallUnit(bedroomWU1);
-        bedroomWU1Ch3.setName("Ch_3");
+        bedroomWU1Ch3.setName("bed_wu1_Ch_3");
         daoSession.insert(bedroomWU1Ch3);
         //bedroomWU2
         Channel bedroomWU2Ch1 = new Channel();
@@ -217,14 +211,14 @@ public class MainActivity extends LocalizationActivity {
         bedroomWU2Ch1.setFunction(lighting);
         bedroomWU2Ch1.setState(20);
         bedroomWU2Ch1.setWallUnit(bedroomWU2);
-        bedroomWU2Ch1.setName("Ch_1");
+        bedroomWU2Ch1.setName("bed_wu2_Ch_1");
         daoSession.insert(bedroomWU2Ch1);
         Channel bedroomWU2Ch2 = new Channel();
         bedroomWU2Ch2.setAddress("45764");
         bedroomWU2Ch2.setFunction(sound);
         bedroomWU2Ch2.setState(22);
         bedroomWU2Ch2.setWallUnit(bedroomWU2);
-        bedroomWU2Ch2.setName("Ch_2");
+        bedroomWU2Ch2.setName("bed_wu2_Ch_2");
         daoSession.insert(bedroomWU2Ch2);
         //kitchenWU1
         Channel kitchenWU1Ch1 = new Channel();
@@ -232,21 +226,21 @@ public class MainActivity extends LocalizationActivity {
         kitchenWU1Ch1.setFunction(lighting);
         kitchenWU1Ch1.setState(100);
         kitchenWU1Ch1.setWallUnit(kitchenWU1);
-        kitchenWU1Ch1.setName("Ch_1");
+        kitchenWU1Ch1.setName("kit_wu1_Ch_1");
         daoSession.insert(kitchenWU1Ch1);
         Channel kitchenWU1Ch2 = new Channel();
         kitchenWU1Ch2.setAddress("45764");
         kitchenWU1Ch2.setFunction(lighting);
         kitchenWU1Ch2.setState(40);
         kitchenWU1Ch2.setWallUnit(kitchenWU1);
-        kitchenWU1Ch2.setName("Ch_2");
+        kitchenWU1Ch2.setName("kit_wu1_Ch_2");
         daoSession.insert(kitchenWU1Ch2);
         Channel kitchenWU1Ch3 = new Channel();
         kitchenWU1Ch3.setAddress("45764");
         kitchenWU1Ch3.setFunction(lighting);
         kitchenWU1Ch3.setState(55);
         kitchenWU1Ch3.setWallUnit(kitchenWU1);
-        kitchenWU1Ch3.setName("Ch_3");
+        kitchenWU1Ch3.setName("kit_wu1_Ch_3");
         daoSession.insert(kitchenWU1Ch3);
         //livingRoomWU1
         Channel LivingRoomWU1Ch1 = new Channel();
@@ -254,14 +248,14 @@ public class MainActivity extends LocalizationActivity {
         LivingRoomWU1Ch1.setFunction(lighting);
         LivingRoomWU1Ch1.setState(12);
         LivingRoomWU1Ch1.setWallUnit(livingRoomWU1);
-        LivingRoomWU1Ch1.setName("Ch_1");
+        LivingRoomWU1Ch1.setName("liv_wu1_Ch_1");
         daoSession.insert(LivingRoomWU1Ch1);
         Channel LivingRoomWU1Ch2 = new Channel();
         LivingRoomWU1Ch2.setAddress("45764");
         LivingRoomWU1Ch2.setFunction(lighting);
         LivingRoomWU1Ch2.setState(79);
         LivingRoomWU1Ch2.setWallUnit(livingRoomWU1);
-        LivingRoomWU1Ch2.setName("Ch_2");
+        LivingRoomWU1Ch2.setName("liv_wu1_Ch_2");
         daoSession.insert(LivingRoomWU1Ch2);
         //livingRoomWU2
         Channel LivingRoomWU2Ch1 = new Channel();
@@ -269,21 +263,21 @@ public class MainActivity extends LocalizationActivity {
         LivingRoomWU2Ch1.setFunction(lighting);
         LivingRoomWU2Ch1.setState(34);
         LivingRoomWU2Ch1.setWallUnit(livingRoomWU2);
-        LivingRoomWU2Ch1.setName("Ch_1");
+        LivingRoomWU2Ch1.setName("liv_wu2_Ch_1");
         daoSession.insert(LivingRoomWU2Ch1);
         Channel LivingRoomWU2Ch2 = new Channel();
         LivingRoomWU2Ch2.setAddress("45");
         LivingRoomWU2Ch2.setFunction(lighting);
         LivingRoomWU2Ch2.setState(50);
         LivingRoomWU2Ch2.setWallUnit(livingRoomWU2);
-        LivingRoomWU2Ch2.setName("Ch_2");
+        LivingRoomWU2Ch2.setName("liv_wu2_Ch_2");
         daoSession.insert(LivingRoomWU2Ch2);
         Channel LivingRoomWU2Ch3 = new Channel();
         LivingRoomWU2Ch3.setAddress("464");
         LivingRoomWU2Ch3.setFunction(lighting);
         LivingRoomWU2Ch3.setState(77);
         LivingRoomWU2Ch3.setWallUnit(livingRoomWU2);
-        LivingRoomWU2Ch3.setName("Ch_3");
+        LivingRoomWU2Ch3.setName("liv_wu2_Ch_3");
         daoSession.insert(LivingRoomWU2Ch3);
         //livingRoomWU3
         Channel LivingRoomWU3Ch1 = new Channel();
@@ -291,14 +285,14 @@ public class MainActivity extends LocalizationActivity {
         LivingRoomWU3Ch1.setFunction(lighting);
         LivingRoomWU3Ch1.setState(67);
         LivingRoomWU3Ch1.setWallUnit(livingRoomWU3);
-        LivingRoomWU3Ch1.setName("Ch_1");
+        LivingRoomWU3Ch1.setName("liv_wu3_Ch_1");
         daoSession.insert(LivingRoomWU3Ch1);
         Channel LivingRoomWU3Ch2 = new Channel();
         LivingRoomWU3Ch2.setAddress("45764");
         LivingRoomWU3Ch2.setFunction(lighting);
         LivingRoomWU3Ch2.setState(88);
         LivingRoomWU3Ch2.setWallUnit(livingRoomWU3);
-        LivingRoomWU3Ch2.setName("Ch_2");
+        LivingRoomWU3Ch2.setName("liv_wu3_Ch_2");
         daoSession.insert(LivingRoomWU3Ch2);
         //balconyWU1
         Channel balconyWU1Ch1 = new Channel();
@@ -306,14 +300,14 @@ public class MainActivity extends LocalizationActivity {
         balconyWU1Ch1.setFunction(lighting);
         balconyWU1Ch1.setState(57);
         balconyWU1Ch1.setWallUnit(balconyWU1);
-        balconyWU1Ch1.setName("Ch_1");
+        balconyWU1Ch1.setName("bal_wu1_Ch_1");
         daoSession.insert(balconyWU1Ch1);
         Channel balconyWU1Ch2 = new Channel();
         balconyWU1Ch2.setAddress("45764");
         balconyWU1Ch2.setFunction(lighting);
         balconyWU1Ch2.setState(14);
         balconyWU1Ch2.setWallUnit(balconyWU1);
-        balconyWU1Ch2.setName("Ch_2");
+        balconyWU1Ch2.setName("bal_wu1_Ch_2");
         daoSession.insert(balconyWU1Ch2);
 
         Memory Enter = new Memory();
@@ -397,18 +391,11 @@ public class MainActivity extends LocalizationActivity {
 
     public void sendPacket(View v)
     {
-            Intent intent = new Intent(this, SetLightingActivity.class);
-            startActivity(intent);
-    }
-
-   public void centralSetting(View v) {
-        Intent intent = new Intent(this, CentralSettingActivity.class);
+        Intent intent = new Intent(this, SetLightingActivity.class);
         startActivity(intent);
     }
 
     public void changeLanguage(View v) {
-        //LocalizationActivity localization = new LocalizationActivity();
-
         String lang = getLanguage();
         if (lang == "en") {
             setLanguage("ar");
@@ -416,7 +403,10 @@ public class MainActivity extends LocalizationActivity {
             setLanguage("en");
         }
     }
-
+    public void changeNames(View view){
+        Intent intent = new Intent(this, ChangeNamesActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     public void onStart() {

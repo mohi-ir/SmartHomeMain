@@ -1,6 +1,3 @@
-CHANGED,E:\projects\MyHome\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\mohi_pc\myhome\SetLightingActivity$1$override.class
+CHANGED,E:\projects\MyHome\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\mohi_pc\myhome\RoomFragment$override.class
 CHANGED,E:\projects\MyHome\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\android\tools\fd\runtime\AppPatchesLoaderImpl.class
-CHANGED,E:\projects\MyHome\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\mohi_pc\myhome\SetLightingActivity$2$override.class
-CHANGED,E:\projects\MyHome\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\mohi_pc\myhome\SetLightingActivity$override.class
-CHANGED,E:\projects\MyHome\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\mohi_pc\myhome\SetLightingActivity$ChannelAdapter$1$override.class
-CHANGED,E:\projects\MyHome\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\mohi_pc\myhome\SetLightingActivity$ChannelAdapter$override.class
+CHANGED,E:\projects\MyHome\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\mohi_pc\myhome\R$id$override.class

@@ -3,6 +3,7 @@ package com.example.mohi_pc.myhome;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +29,10 @@ import com.GreenDao.model.Room;
 import com.GreenDao.model.RoomDao;
 import com.GreenDao.model.WallUnit;
 import com.GreenDao.model.WallUnitDao;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+
 import android.graphics.Color;
 
 import java.util.HashMap;
@@ -39,21 +44,26 @@ import java.util.List;
 import de.greenrobot.dao.query.Join;
 import de.greenrobot.dao.query.QueryBuilder;
 
-public class SetLightingActivity extends AppCompatActivity {
+public class SetLightingActivity extends MainActivity {
 
     ListView roomsList;
     ListView memoriesList;
     DaoSession daoSession;
     private static boolean channelOnTouch = false;
     private static int channelValueOnTouch = 0;
-    private static long selectedMemory =-1;
-    Map<Long,Integer> channelStateMap = new HashMap<Long, Integer>() ;
+    private static long selectedMemory = -1;
+    Map<Long, Integer> channelStateMap = new HashMap<Long, Integer>();
     MemoryValueDao memoryValueDaoRead;
     MemoryValueDao memoryValueDaoWrite;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_lighting);
 
@@ -64,25 +74,25 @@ public class SetLightingActivity extends AppCompatActivity {
         daoSession = daoMaster.newSession();
 
         //load all rooms and memories
-        getAllRooms();
+        getAllRooms(); //roomsList.setSelection(0);
         getAllMemories();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    public void getAllMemories()
-    {
+    public void getAllMemories() {
         final MemoryDao memoryDao = daoSession.getMemoryDao();
 
         ArrayList<Memory> listRooms = (ArrayList<Memory>) memoryDao.loadAll();
 
-        if(!memoryDao.loadAll().isEmpty())
-        {
+        if (!memoryDao.loadAll().isEmpty()) {
             ArrayList<Memory> listMemories = (ArrayList<Memory>) memoryDao.loadAll();
 
             memoriesList = (ListView) findViewById(R.id.listView_memories);
             ArrayAdapter<Memory> adapter = new ArrayAdapter<Memory>(this, android.R.layout.simple_list_item_1, listMemories);
             memoriesList.setAdapter(adapter);
-        }
-        else{
+        } else {
             Toast.makeText(getApplicationContext(), "No memory defined", Toast.LENGTH_SHORT).show();
         }
         memoriesList.setOnItemClickListener(
@@ -100,19 +110,21 @@ public class SetLightingActivity extends AppCompatActivity {
                 });
     }
 
-    public void getAllRooms()
-    {
+    public void getAllRooms() {
         RoomDao roomDao = daoSession.getRoomDao();
 
-        if(!roomDao.loadAll().isEmpty())
-        {
+        if (!roomDao.loadAll().isEmpty()) {
             ArrayList<Room> listRooms = (ArrayList<Room>) roomDao.loadAll();
 
             roomsList = (ListView) findViewById(R.id.listView_rooms);
             ArrayAdapter<Room> adapter = new ArrayAdapter<Room>(this, android.R.layout.simple_list_item_1, listRooms);
             roomsList.setAdapter(adapter);
-        }
-        else{
+            getChannelsByRoomName(listRooms.get(0).getName());
+
+            roomsList.getAdapter().getView(0, roomsList.getChildAt(0), roomsList).setBackgroundColor(Color.BLACK);
+            //roomsList.getAdapter().getView(0, null , roomsList).setBackgroundColor(Color.BLACK);
+
+        } else {
             Toast.makeText(getApplicationContext(), "No room defined", Toast.LENGTH_SHORT).show();
         }
         roomsList.setOnItemClickListener(
@@ -122,17 +134,14 @@ public class SetLightingActivity extends AppCompatActivity {
                         for (int j = 0; j < parent.getChildCount(); j++) {
                             parent.getChildAt(j).setBackgroundColor(Color.TRANSPARENT);
                         }
-
                         view.setBackgroundColor(Color.parseColor("#8ed5f6"));
-                        String roomName  = parent.getAdapter().getItem(position).toString();
+                        String roomName = parent.getAdapter().getItem(position).toString();
                         getChannelsByRoomName(roomName);
-
                     }
                 });
     }
 
-    public void getChannelsByRoomName(String roomName)
-    {
+    public void getChannelsByRoomName(String roomName) {
         ChannelDao channelDao = daoSession.getChannelDao();
         QueryBuilder qb = channelDao.queryBuilder();
         Join wallUnit = qb.join(ChannelDao.Properties.WallUnitId, WallUnit.class);
@@ -140,73 +149,114 @@ public class SetLightingActivity extends AppCompatActivity {
         room.where(RoomDao.Properties.Name.eq(roomName));
         List<Channel> roomChannels = qb.list();
 
-        for(int i=0;i<roomChannels.size();i++){
-            Long id=roomChannels.get(i).getId();
-            Integer state= roomChannels.get(i).getState();
+        for (int i = 0; i < roomChannels.size(); i++) {
+            Long id = roomChannels.get(i).getId();
+            Integer state = roomChannels.get(i).getState();
             channelStateMap.put(id, state);
         }
 
         ListView channelsListView = (ListView) findViewById(R.id.listView_channels);
         ChannelAdapter channelsadapter = new ChannelAdapter(this, R.layout.channel, roomChannels);
-        channelsListView .setAdapter(channelsadapter);
+        channelsListView.setAdapter(channelsadapter);
     }
 
-    public  class ChannelAdapter extends ArrayAdapter<Channel>   {
+    @Override
+    public void onStart() {
+        super.onStart();
 
-        public ChannelAdapter (Context context , int textViewResourceId){
-            super(context , textViewResourceId);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "SetLighting Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.example.mohi_pc.myhome/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "SetLighting Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.example.mohi_pc.myhome/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
+
+    public class ChannelAdapter extends ArrayAdapter<Channel> {
+
+        public ChannelAdapter(Context context, int textViewResourceId) {
+            super(context, textViewResourceId);
         }
+
         public ChannelAdapter(Context context, int resource, List<Channel> items) {
             super(context, resource, items);
         }
 
         @Override
-        public View getView(int position , View convertView, final ViewGroup parent) {
-            View v = convertView ;
-            if(v == null) {
+        public View getView(int position, View convertView, final ViewGroup parent) {
+            View v = convertView;
+            if (v == null) {
                 LayoutInflater vi;
                 vi = LayoutInflater.from(getContext());
-                v = vi.inflate(R.layout.channel , null);
+                v = vi.inflate(R.layout.channel, null);
             }
 
             final Channel channel = getItem(position);
 
-            if(channel != null){
+            if (channel != null) {
                 SeekBar sk = (SeekBar) v.findViewById(R.id.channelSeekBar);
                 TextView tk = (TextView) v.findViewById(R.id.textViewSeekBar);
                 String channelInfo = channel.getWallUnit().getName().concat("- ").concat(channel.getName());
                 tk.setText(channelInfo);
 
-                if(sk != null){
+                if (sk != null) {
                     sk.setMax(100);
                     sk.setProgress(channel.getState());
                     sk.setEnabled(true);
                     sk.setContentDescription(channel.toString());
                     sk.setOnSeekBarChangeListener(
-                            new SeekBar.OnSeekBarChangeListener(){
-                                @Override
-                                public void onStopTrackingTouch(SeekBar seekBar) {
-                                    channelStateMap.put(channel.getId(),seekBar.getProgress());
-                                    sendPacket();
-                                }
+                        new SeekBar.OnSeekBarChangeListener() {
+                            @Override
+                            public void onStopTrackingTouch(SeekBar seekBar) {
+                                channelStateMap.put(channel.getId(), seekBar.getProgress());
+                                sendPacket();
+                            }
 
-                                @Override
-                                public void onStartTrackingTouch(SeekBar seekBar) {
-                                    channelOnTouch = true;
-                                    channelValueOnTouch = seekBar.getProgress();
-                                }
+                            @Override
+                            public void onStartTrackingTouch(SeekBar seekBar) {
+                                channelOnTouch = true;
+                                channelValueOnTouch = seekBar.getProgress();
+                            }
 
-                                @Override
-                                public void onProgressChanged(SeekBar seekBar, int arg1, boolean fromUser) {
-                                    //packet request must be sent while arg1 is even
-                                    if(channelOnTouch == true) {
-                                        if (Math.abs(channelValueOnTouch - arg1) == 5){
-                                            sendPacket();
-                                            channelValueOnTouch = arg1 ;
-                                        }
+                            @Override
+                            public void onProgressChanged(SeekBar seekBar, int arg1, boolean fromUser) {
+                                //packet request must be sent while arg1 is even
+                                if (channelOnTouch == true) {
+                                    if (Math.abs(channelValueOnTouch - arg1) == 5) {
+                                        sendPacket();
+                                        channelValueOnTouch = arg1;
                                     }
                                 }
                             }
+                        }
                     );
                 }
             }
@@ -214,8 +264,7 @@ public class SetLightingActivity extends AppCompatActivity {
         }
     }
 
-    public void sendPacket()
-    {
+    public void sendPacket() {
         Intent intent = new Intent(this, UsbCommunicationService.class);
         Bundle bundle = new Bundle();
         bundle.putInt("MESSAGE_TYPE", 1);
@@ -225,7 +274,7 @@ public class SetLightingActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onPause(){
+    public void onPause() {
         super.onPause();
         channelOnTouch = false;
     }
@@ -283,8 +332,7 @@ public class SetLightingActivity extends AppCompatActivity {
             daoSessionWrite.clear();
             dbWrite.close();
             helperWrite.close();
-        }
-        else{
+        } else {
             Toast.makeText(getApplicationContext(), "select a memory", Toast.LENGTH_SHORT).show();
         }
     }

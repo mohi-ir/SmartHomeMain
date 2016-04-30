@@ -21,18 +21,18 @@ android {
 
 repositories {
     mavenCentral()
-    maven{
-        url"https://jitpack.io"
-
+    maven {
+        url "https://jitpack.io"
     }
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-   // testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.1'
+    // testCompile 'junit:junit:4.12'
     compile files('libs/greendao-2.1.0.jar')
-    compile 'com.android.support:recyclerview-v7:21.0.0'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:recyclerview-v7:23.3.0'
     compile 'com.akexorcist:localizationactivity:1.0.9'
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile 'com.github.felHR85:UsbSerial:3.3'
+    compile 'com.android.support:support-v4:23.3.0'
 }

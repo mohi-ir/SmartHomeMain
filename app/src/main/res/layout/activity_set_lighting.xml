@@ -9,13 +9,18 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SetLightingActivity">
 
+    <include android:id="@+id/header" layout="@layout/footer" />
+
     <RelativeLayout
         android:layout_width="200dp"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:layout_alignParentTop="true"
         android:id="@+id/relativeLayout4"
         android:contextClickable="true"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentStart="true"
+        android:background="#fce9fe">
 
         <ListView
             android:layout_width="wrap_content"
@@ -27,12 +32,12 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:layout_alignTop="@+id/relativeLayout4"
         android:layout_toRightOf="@+id/relativeLayout4"
-        android:layout_toEndOf="@+id/relativeLayout4"
         android:background="#f9fce4"
-        android:id="@+id/relativeLayout5">
+        android:id="@+id/relativeLayout5"
+        android:layout_marginBottom="50dp">
 
         <ListView
             android:layout_width="800dp"
@@ -47,13 +52,14 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:layout_alignTop="@+id/relativeLayout5"
         android:layout_toRightOf="@+id/relativeLayout5"
         android:layout_toEndOf="@+id/relativeLayout5"
         android:id="@+id/relativeLayout6"
-        android:background="#eafcf1"
-        android:clickable="true">
+        android:background="#e0eff6"
+        android:clickable="true"
+        android:layout_marginBottom="50dp">
 
         <ListView
             android:layout_width="fill_parent"
@@ -63,15 +69,6 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true" />
-
-        <EditText
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText_memory_name"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:visibility="invisible"/>
 
     </RelativeLayout>
 
@@ -87,7 +84,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select the room"
+            android:text="@string/help_select_room"
             android:id="@+id/textView"
             android:layout_alignBottom="@+id/textView2"
             android:layout_alignParentLeft="true"
@@ -97,7 +94,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="change the channels ligth state"
+            android:text="@string/configure_channels"
             android:id="@+id/textView2"
             android:layout_marginLeft="102dp"
             android:layout_marginStart="102dp"
@@ -105,16 +102,17 @@
             android:layout_toRightOf="@+id/textView"
             android:layout_toEndOf="@+id/textView" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Save"
-            android:id="@+id/button_save_light"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:onClick="saveLightSetting"/>
-
     </RelativeLayout>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:id="@+id/button_save_light"
+        android:onClick="saveLightSetting"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/header"
+        android:layout_alignEnd="@+id/header"
+        android:background="#0fb436" />
 
 </RelativeLayout>

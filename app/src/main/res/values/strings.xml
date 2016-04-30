@@ -2,26 +2,32 @@
     <string name="app_name">My Home</string>
 
     <!-- main activity -->
-    <string name="enter_home">Enter Home</string>
     <string name="settings">Settings</string>
-    <string name="exit_home">Exit Home</string>
-    <string name="u1">U1</string>
-    <string name="lighting">Lighting</string>
-    <string name="u2">U2</string>
+    <string name="set_lighting">Lighting</string>
+    <string name="changeNames">change names</string>
 
-    <!-- home_lighting_activity -->
-    <string name="living_room">Living Room</string>
-    <string name="entrance">Entrance</string>
-    <string name="balcony">Balcony</string>
-    <string name="master_bedroom">Master Bedroom</string>
+    <!-- activity_set_lighting -->
+    <string name="help_select_room">select the room</string>
+    <string name="configure_channels">select your desired lighting</string>
+    <string name="cancel">cancel</string>
 
-    <!-- central setting -->
+    <!-- activity central setting -->
     <string name="password_setting">Password Setting</string>
     <string name="save">save</string>
 
-    <!--  layout -->
-    <string name="language">فارسی</string>
-    <string name="savee">Save</string>
+    <!-- activity change names -->
+    <string name="wall_units">wall units</string>
+    <string name="channels">channels</string>
+    <string name="save_dialog_question">Do you want to save the changes?</string>
+    <string name="changes_saved">Your changes saved</string>
+    <string name="memories">Memories</string>
+    <string name="rooms">Rooms</string>
 
-    <string name="help_save_memory">choose a state for this config</string>
+    <!--  footer -->
+    <string name="language">Farsi/Eng</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>

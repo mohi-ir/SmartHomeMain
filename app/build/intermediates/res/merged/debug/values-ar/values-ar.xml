@@ -20,7 +20,10 @@
     <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"‏مشاركة مع %s"</string>
     <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"تصغير"</string>
     <string name="app_name">خانه من</string>
-    <string name="balcony">بالکن</string>
+    <string name="cancel">انصراف</string>
+    <string name="changeNames">تغییر اسامی</string>
+    <string name="changes_saved">تغییرات ذخیره شد</string>
+    <string name="channels">کانال ها</string>
     <string msgid="6428604800157361567" name="common_android_wear_notification_needs_update_text">"‏يحتاج <ns1:g id="APP_NAME">%1$s</ns1:g> إلى تحديث لتطبيق Android Wear."</string>
     <string msgid="2453027084525739603" name="common_android_wear_update_text">"‏لن يتم تشغيل <ns1:g id="APP_NAME">%1$s</ns1:g> ما لم تحدِّث تطبيق Android Wear."</string>
     <string msgid="1366439133145190222" name="common_android_wear_update_title">"‏تحديث Android Wear"</string>
@@ -51,17 +54,16 @@
     <string msgid="2201289642219771610" name="common_google_play_services_updating_text">"‏لن يتم تشغيل <ns1:g id="APP_NAME">%1$s</ns1:g> بدون خدمات Google Play التي يتم تحديثها حاليًا."</string>
     <string msgid="815008177440683245" name="common_google_play_services_updating_title">"‏يتم الآن تحديث خدمات Google Play."</string>
     <string msgid="411506735369601515" name="common_open_on_phone">"فتح على الهاتف"</string>
-    <string name="enter_home">ورود</string>
-    <string name="entrance">ورودی</string>
-    <string name="exit_home">خروج</string>
-    <string name="language">English</string>
-    <string name="lighting">روشنایی</string>
-    <string name="living_room">اتاق نشیمن</string>
-    <string name="master_bedroom">اتاق خواب </string>
+    <string name="configure_channels">نور دلخواه خود را انتخاب کنید</string>
+    <string name="help_select_room">اتاق را انتخاب کنید</string>
+    <string name="language">Farsi/Eng</string>
+    <string name="memories">حافظه ها</string>
     <string name="password_setting">کلمه عبور</string>
+    <string name="rooms">اتاق ها</string>
     <string name="save">ذخیره</string>
+    <string name="save_dialog_question">آیا مایل هستید تغییرات را ذخیره کنید؟</string>
+    <string name="set_lighting">روشنایی</string>
     <string name="settings">تنظیمات</string>
     <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"+999"</string>
-    <string name="u1">U1</string>
-    <string name="u2">U2</string>
+    <string name="wall_units">کلید های دیواری</string>
 </resources>
