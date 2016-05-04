@@ -61,12 +61,13 @@ public class MainActivity extends LocalizationActivity {
         helper.close();
         //loadFixtures();
 
+        //listening to usb-serial port for incomming data
        /* Intent intent = new Intent(this, UsbCommunicationService.class);
         Bundle bundle = new Bundle();
         bundle.putInt("MESSAGE_TYPE", 0);
         bundle.putString("COM_PORT", "R");
         intent.putExtras(bundle);
-        startService(intent);*/
+        startService(intent); */
     }
 
     public void loadFixtures()

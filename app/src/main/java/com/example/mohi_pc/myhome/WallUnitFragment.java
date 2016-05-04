@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,10 +77,15 @@ public class WallUnitFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             cuWallU = getArguments().getInt(ARG_CURRENT_WALLUNIT);
-
             mRoom = getArguments().getLong(ARG_ROOM);
+
+        }
+
+        if(mRoom!= null) {
+
             DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this.getContext(), "home_database", null);
             SQLiteDatabase db = helper.getReadableDatabase();
             DaoMaster daoMaster = new DaoMaster(db);
@@ -91,14 +97,16 @@ public class WallUnitFragment extends ListFragment {
             wallUnits = qb.list();
             db.close();
             helper.close();
+        }
 
-            if (savedInstanceState != null) {
-                // Restore last state for checked position.
-                cuWallU = savedInstanceState.getInt("currentWallunit", 0);
-            }
-            else {
-                cuWallU = 0;
-            }
+        if (savedInstanceState != null) {
+
+            // Restore last state for checked position.
+            cuWallU = savedInstanceState.getInt("currentWallunit", 0);
+        }
+        else {
+
+            cuWallU = 0;
         }
     }
 
@@ -106,10 +114,13 @@ public class WallUnitFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        if(mRoom!=null) {
+
+       if(mRoom!=null) {
+
             WallUnitAdapter adapter = new WallUnitAdapter(getActivity(), R.layout.editable_wallunit_item, wallUnits);
             setListAdapter(adapter);
-        }
+       }
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_wall_unit, container, false);
     }
@@ -124,6 +135,7 @@ public class WallUnitFragment extends ListFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
@@ -135,6 +147,7 @@ public class WallUnitFragment extends ListFragment {
     @Override
     public void onDetach() {
         super.onDetach();
+
         mListener = null;
     }
 
@@ -205,60 +218,6 @@ public class WallUnitFragment extends ListFragment {
                             if (!gainFocus) {
                                 mListener.WallUnitsOnDataPass(wallUnit.getId(),String.valueOf(et.getText()));
                             }
-                        }
-                    });
-                }
-            }
-            return v;
-        }
-    }
-
-    public class RoomAdapter extends ArrayAdapter<Room> {
-
-        public RoomAdapter(Context context, int textViewResourceId) {
-            super(context, textViewResourceId);
-        }
-
-        public RoomAdapter(Context context, int resource, List<Room> rooms_list) {
-            super(context, resource, rooms_list);
-        }
-
-        @Override
-        public View getView(final int position, View convertView, final ViewGroup parent) {
-            View v = convertView;
-            if (v == null) {
-                LayoutInflater vi;
-                vi = LayoutInflater.from(getContext());
-                v = vi.inflate(R.layout.editable_llist_item, null);
-            }
-
-            final Room room = getItem(position);
-
-            if (room != null) {
-
-                final EditText et = (EditText) v.findViewById(R.id.editText_room_fragment_item);
-                Button bt = (Button) v.findViewById(R.id.button_room_item);
-
-                if (et != null) {
-                    et.setText(room.getName());
-
-                    et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                        public void onFocusChange(View v, boolean gainFocus) {
-                            if (!gainFocus) {
-                                mListener.WallUnitsOnDataPass(room.getId(),String.valueOf(et.getText()));
-                            }
-                        }
-                    });
-                    bt.setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View v) {
-                            ((View) v.getParent()).setBackgroundColor(Color.rgb(255, 248, 220));
-                            //v.setBackgroundColor(Color.rgb(255, 248, 220));
-                            for(int j=0;j<parent.getChildCount();j++){
-                                if (j!=position){
-                                    parent.getChildAt(j).setBackgroundColor(Color.TRANSPARENT);
-                                }
-                            }
-                            showChannels(position);
                         }
                     });
                 }

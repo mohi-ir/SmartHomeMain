@@ -158,7 +158,7 @@ public class UsbCommunicationService extends Service {
             String data = null;
 
             data = new String(arg0);
-            Log.d("SERIAL",data);
+            Log.d("SERIAL_DATA_COMMING",data);
         }
     };
 

@@ -67,8 +67,10 @@ public class RoomFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
            cuRoom = getArguments().getInt(ARG_CURRENT_ROOM);
+
         }
 
         //read all rooms from memory
@@ -83,17 +85,21 @@ public class RoomFragment extends ListFragment {
         if (savedInstanceState != null) {
             // Restore last state for checked position.
             cuRoom = savedInstanceState.getInt("currentRoom", 0);
+
         }
         else{
             cuRoom =0;
+
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+
         View view= inflater.inflate(R.layout.fragment_room, container, false);
         RoomAdapter adapter = new RoomAdapter(getActivity(), R.layout.editable_llist_item, rooms);
         setListAdapter(adapter);
+
         return view;
     }
 

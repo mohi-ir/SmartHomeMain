@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +58,9 @@ public class MemoryFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
+
         }
 
         //read all memories from DB
@@ -74,8 +77,10 @@ public class MemoryFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         MemoryAdapter adapter = new MemoryAdapter(getActivity(), R.layout.editable_memory_item, memories);
         setListAdapter(adapter);
+
         return inflater.inflate(R.layout.fragment_memory, container, false);
     }
 

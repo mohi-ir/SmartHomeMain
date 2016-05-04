@@ -11,14 +11,16 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
-        <!--
-        <service
-            android:name=".UsbCommunicationService"
-            android:exported="false"
-            android:isolatedProcess="true"
-            android:permission="string"
-            android:process=":communicationProcess"></service>
-        -->
+        <service android:name=".SimpleIME"
+            android:label="@string/mKeypad"
+            android:permission="android.permission.BIND_INPUT_METHOD"
+            >
+            <meta-data android:name="android.view.im" android:resource="@xml/method"/>
+            <intent-filter>
+                <action android:name="android.view.InputMethod" />
+            </intent-filter>
+        </service>
+        
         <service android:name=".UsbCommunicationService" />
 
         <activity android:name=".MainActivity">
@@ -46,7 +48,7 @@
 
         <activity android:name=".SetLightingActivity" />
         <activity android:name=".ChangeNamesActivity"
-            >
+                  android:windowSoftInputMode="adjustPan" >
 
         </activity>
     </application>

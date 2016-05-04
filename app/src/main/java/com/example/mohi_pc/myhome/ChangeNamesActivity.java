@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.GreenDao.model.DaoMaster;
@@ -20,11 +22,12 @@ import com.GreenDao.model.WallUnit;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.akexorcist.localizationactivity .LocalizationActivity;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class ChangeNamesActivity extends MainActivity implements RoomFragment.OnFragmentInteractionListener,
+public class ChangeNamesActivity extends LocalizationActivity implements RoomFragment.OnFragmentInteractionListener,
         WallUnitFragment.OnFragmentInteractionListener,
         ChannelFragment.OnFragmentInteractionListener,
         MemoryFragment.OnFragmentInteractionListener {
@@ -48,6 +51,7 @@ public class ChangeNamesActivity extends MainActivity implements RoomFragment.On
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_names);
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -55,28 +59,34 @@ public class ChangeNamesActivity extends MainActivity implements RoomFragment.On
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
-        alertbox.setTitle(R.string.save_dialog_question);
-        //alertbox.setMessage("Quit ??? ");
 
-        alertbox.setPositiveButton(R.string.save,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        saveNamesInDB();
-                        ChangeNamesActivity.super.onBackPressed();
-                    }
-                });
+        if (!room_map.isEmpty() || !wallUnit_map.isEmpty() || !channel_map.isEmpty() || !memory_map.isEmpty()) {
+            AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
+            alertbox.setTitle(R.string.save_dialog_question);
+            //alertbox.setMessage("Quit ??? ");
 
-        alertbox.setNeutralButton(R.string.cancel,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        ChangeNamesActivity.super.onBackPressed();
-                    }
-                });
+            alertbox.setPositiveButton(R.string.save,
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            saveNamesInDB();
+                            ChangeNamesActivity.super.onBackPressed();
+                        }
+                    });
 
-        alertbox.show();
+            alertbox.setNeutralButton(R.string.cancel,
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            ChangeNamesActivity.super.onBackPressed();
+                        }
+                    });
 
-                return;
+            alertbox.show();
+        }
+        else{
+            ChangeNamesActivity.super.onBackPressed();
+        }
+
+        return;
 
     }
 
@@ -180,6 +190,7 @@ public class ChangeNamesActivity extends MainActivity implements RoomFragment.On
     public void onStart() {
         super.onStart();
 
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
@@ -214,5 +225,20 @@ public class ChangeNamesActivity extends MainActivity implements RoomFragment.On
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
+    }
+
+    public void changeLanguage(View v) {
+
+        getSupportFragmentManager().beginTransaction().
+                remove(getSupportFragmentManager().findFragmentById(R.id.fragment_wallUnit)).commit();
+        getSupportFragmentManager().beginTransaction().
+                remove(getSupportFragmentManager().findFragmentById(R.id.fragment_channel)).commit();
+
+        String lang = getLanguage();
+        if (lang == "en") {
+            setLanguage("ar");
+        } else if (lang == "ar") {
+            setLanguage("en");
+        }
     }
 }
