@@ -10,18 +10,18 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
+        <service
+            android:name=".KeyPadIME"
+            android:label="@string/homeKeyPad"
+            android:permission="android.permission.BIND_INPUT_METHOD">
+            <meta-data
+                android:name="android.view.im"
+                android:resource="@xml/method" />
 
-        <service android:name=".SimpleIME"
-            android:label="@string/mKeypad"
-            android:permission="android.permission.BIND_INPUT_METHOD"
-            >
-            <meta-data android:name="android.view.im" android:resource="@xml/method"/>
             <intent-filter>
                 <action android:name="android.view.InputMethod" />
             </intent-filter>
         </service>
-        
-        <service android:name=".UsbCommunicationService" />
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -47,10 +47,14 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".SetLightingActivity" />
-        <activity android:name=".ChangeNamesActivity"
-                  android:windowSoftInputMode="adjustPan" >
+        <activity
+            android:name=".ChangeNamesActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
 
-        </activity>
+        <service
+            android:name=".UsbToSerialComService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

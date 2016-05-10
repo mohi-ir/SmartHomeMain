@@ -1,12 +1,11 @@
 package com.example.mohi_pc.myhome;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 
 import android.net.Uri;
 import android.os.Bundle;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.GreenDao.model.Channel;
@@ -19,13 +18,14 @@ import com.GreenDao.model.MemoryType;
 import com.GreenDao.model.Room;
 import com.GreenDao.model.WallUnit;
 import com.GreenDao.model.WuType;
-import com.akexorcist.localizationactivity.LocalizationActivity;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+import android.content.Context;
+import android.content.SharedPreferences;
 
-public class MainActivity extends LocalizationActivity {
+public class MainActivity extends AppCompatActivity {
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -33,21 +33,18 @@ public class MainActivity extends LocalizationActivity {
      */
     private GoogleApiClient client;
 
-    public static final String MyPREFERENCES = "MyPrefs" ;
-
     boolean isStartUsbCommunication =false;
+
+    private SharedPrefAdapter spObject;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
-        // network adress:
-        SharedPreferences sharedpreferences;
-        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putString("networkAddress", "belabelabela");
-        editor.commit();
+
+        //setting network Address
+        spObject = new SharedPrefAdapter(this);
+        spObject.prefSet(spObject.COMMUNICATION_PREF,spObject.NET_ADDRESS_ROW,"100200");
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -61,13 +58,9 @@ public class MainActivity extends LocalizationActivity {
         helper.close();
         //loadFixtures();
 
-        //listening to usb-serial port for incomming data
-       /* Intent intent = new Intent(this, UsbCommunicationService.class);
-        Bundle bundle = new Bundle();
-        bundle.putInt("MESSAGE_TYPE", 0);
-        bundle.putString("COM_PORT", "R");
-        intent.putExtras(bundle);
-        startService(intent); */
+        //creating a service for usb-to-serial connection
+        Intent intent = new Intent(this, UsbToSerialComService.class);
+        startService(intent);
     }
 
     public void loadFixtures()
@@ -396,14 +389,6 @@ public class MainActivity extends LocalizationActivity {
         startActivity(intent);
     }
 
-    public void changeLanguage(View v) {
-        String lang = getLanguage();
-        if (lang == "en") {
-            setLanguage("ar");
-        } else if (lang == "ar") {
-            setLanguage("en");
-        }
-    }
     public void changeNames(View view){
         Intent intent = new Intent(this, ChangeNamesActivity.class);
         startActivity(intent);

@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +43,12 @@ import java.util.List;
 import de.greenrobot.dao.query.Join;
 import de.greenrobot.dao.query.QueryBuilder;
 
-public class SetLightingActivity extends MainActivity {
+import android.content.ComponentName;
+import com.example.mohi_pc.myhome.UsbToSerialComService.LocalBinder;
+import android.content.ServiceConnection;
+import android.os.IBinder;
+
+public class SetLightingActivity extends AppCompatActivity {
 
     ListView roomsList;
     ListView memoriesList;
@@ -55,17 +59,21 @@ public class SetLightingActivity extends MainActivity {
     Map<Long, Integer> channelStateMap = new HashMap<Long, Integer>();
     MemoryValueDao memoryValueDaoRead;
     MemoryValueDao memoryValueDaoWrite;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
+    UsbToSerialComService SerialComService;
+    boolean mBound = false;
 
+    //network address saved in sharedPreferences
+    private static String netAddress;
+
+    private GoogleApiClient client;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_lighting);
+
+        Intent intent = new Intent(this, UsbToSerialComService.class);
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
 
         //initialize DB essentials for Reading from DB
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "home_database", null);
@@ -79,6 +87,58 @@ public class SetLightingActivity extends MainActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "SetLighting Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.example.mohi_pc.myhome/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // Unbind from the USBSerialservice
+        if (mBound) {
+            unbindService(mConnection);
+            mBound = false;
+        }
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "SetLighting Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.example.mohi_pc.myhome/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        channelOnTouch = false;
     }
 
     public void getAllMemories() {
@@ -160,125 +220,6 @@ public class SetLightingActivity extends MainActivity {
         channelsListView.setAdapter(channelsadapter);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "SetLighting Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.example.mohi_pc.myhome/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "SetLighting Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.example.mohi_pc.myhome/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
-    }
-
-    public class ChannelAdapter extends ArrayAdapter<Channel> {
-
-        public ChannelAdapter(Context context, int textViewResourceId) {
-            super(context, textViewResourceId);
-        }
-
-        public ChannelAdapter(Context context, int resource, List<Channel> items) {
-            super(context, resource, items);
-        }
-
-        @Override
-        public View getView(int position, View convertView, final ViewGroup parent) {
-            View v = convertView;
-            if (v == null) {
-                LayoutInflater vi;
-                vi = LayoutInflater.from(getContext());
-                v = vi.inflate(R.layout.channel, null);
-            }
-
-            final Channel channel = getItem(position);
-
-            if (channel != null) {
-                SeekBar sk = (SeekBar) v.findViewById(R.id.channelSeekBar);
-                TextView tk = (TextView) v.findViewById(R.id.textViewSeekBar);
-                String channelInfo = channel.getWallUnit().getName().concat("- ").concat(channel.getName());
-                tk.setText(channelInfo);
-
-                if (sk != null) {
-                    sk.setMax(100);
-                    sk.setProgress(channel.getState());
-                    sk.setEnabled(true);
-                    sk.setContentDescription(channel.toString());
-                    sk.setOnSeekBarChangeListener(
-                        new SeekBar.OnSeekBarChangeListener() {
-                            @Override
-                            public void onStopTrackingTouch(SeekBar seekBar) {
-                                channelStateMap.put(channel.getId(), seekBar.getProgress());
-                                sendPacket();
-                            }
-
-                            @Override
-                            public void onStartTrackingTouch(SeekBar seekBar) {
-                                channelOnTouch = true;
-                                channelValueOnTouch = seekBar.getProgress();
-                            }
-
-                            @Override
-                            public void onProgressChanged(SeekBar seekBar, int arg1, boolean fromUser) {
-                                //packet request must be sent while arg1 is even
-                                if (channelOnTouch == true) {
-                                    if (Math.abs(channelValueOnTouch - arg1) == 5) {
-                                        sendPacket();
-                                        channelValueOnTouch = arg1;
-                                    }
-                                }
-                            }
-                        }
-                    );
-                }
-            }
-            return v;
-        }
-    }
-
-    public void sendPacket() {
-        Intent intent = new Intent(this, UsbCommunicationService.class);
-        Bundle bundle = new Bundle();
-        bundle.putInt("MESSAGE_TYPE", 1);
-        bundle.putString("COM_PORT", "W");
-        intent.putExtras(bundle);
-        startService(intent);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        channelOnTouch = false;
-    }
-
     //save memory-settings to DB
     public void saveLightSetting(View v) {
 
@@ -336,4 +277,85 @@ public class SetLightingActivity extends MainActivity {
             Toast.makeText(getApplicationContext(), "select a memory", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public class ChannelAdapter extends ArrayAdapter<Channel> {
+
+        public ChannelAdapter(Context context, int textViewResourceId) {
+            super(context, textViewResourceId);
+        }
+
+        public ChannelAdapter(Context context, int resource, List<Channel> items) {
+            super(context, resource, items);
+        }
+
+        @Override
+        public View getView(int position, View convertView, final ViewGroup parent) {
+            View v = convertView;
+            if (v == null) {
+                LayoutInflater vi;
+                vi = LayoutInflater.from(getContext());
+                v = vi.inflate(R.layout.channel, null);
+            }
+
+            final Channel channel = getItem(position);
+
+            if (channel != null) {
+                SeekBar sk = (SeekBar) v.findViewById(R.id.channelSeekBar);
+                TextView tk = (TextView) v.findViewById(R.id.textViewSeekBar);
+                String channelInfo = channel.getWallUnit().getName().concat("- ").concat(channel.getName());
+                tk.setText(channelInfo);
+
+                if (sk != null) {
+                    sk.setMax(100);
+                    sk.setProgress(channel.getState());
+                    sk.setEnabled(true);
+                    sk.setContentDescription(channel.toString());
+                    sk.setOnSeekBarChangeListener(
+                        new SeekBar.OnSeekBarChangeListener() {
+                            @Override
+                            public void onStopTrackingTouch(SeekBar seekBar) {
+                                channelStateMap.put(channel.getId(), seekBar.getProgress());
+                                SerialComService.sendLightControlPacketDim(channel,String.valueOf(seekBar.getProgress()));
+                            }
+
+                            @Override
+                            public void onStartTrackingTouch(SeekBar seekBar) {
+                                channelOnTouch = true;
+                                channelValueOnTouch = seekBar.getProgress();
+                            }
+
+                            @Override
+                            public void onProgressChanged(SeekBar seekBar, int arg1, boolean fromUser) {
+                                //packet request must be sent while arg1 is even
+                                if (channelOnTouch == true) {
+                                    if (Math.abs(channelValueOnTouch - arg1) == 5) {
+                                        SerialComService.sendLightControlPacketDim(channel,String.valueOf(seekBar.getProgress()));
+                                        channelValueOnTouch = arg1;
+                                    }
+                                }
+                            }
+                        }
+                    );
+                }
+            }
+            return v;
+        }
+    }
+
+    // Defines callbacks for serialCommunicationservice binding, passed to bindService()
+    private ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className,IBinder service) {
+            // We've bound to LocalService, cast the IBinder and get LocalService instance
+            LocalBinder binder = (LocalBinder) service;
+            SerialComService = binder.getService();
+            mBound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            mBound = false;
+        }
+    };
 }

@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">My Home</string>
+    <string name="homeKeyPad">home keypad</string>
+    <string name="subtype_en_US">English (US)</string>
+
 
     <!-- main activity -->
     <string name="settings">Settings</string>
@@ -30,7 +33,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- custom key-board   -->
-    <string name="mKeypad">mKeyPad</string>
 
 
 </resources>
